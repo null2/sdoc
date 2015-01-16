@@ -127,6 +127,7 @@ class RDoc::Generator::SDoc
 
   def self.setup_options(options)
     @github = false
+    @no_source = false
     options.search_index = true
 
     opt = options.option_parser
@@ -151,7 +152,7 @@ class RDoc::Generator::SDoc
     end
     opt.separator nil
 
-    opt.on("--no-source", "-ns", "Do not show any source code") do |value|
+    opt.on("--no-source", "-ns", "Do not show any source code") do
       options.no_source = true
     end
     opt.separator nil
