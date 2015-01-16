@@ -181,7 +181,7 @@
             </div>
           <% end %>
           
-          <% unless @no_source %>
+          <% unless options.no_source %>
             <% if method.token_stream %>
               <% markup = method.sdoc_markup_code %>
               <div class="sourcecode">

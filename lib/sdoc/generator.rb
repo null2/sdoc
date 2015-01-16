@@ -151,6 +151,11 @@ class RDoc::Generator::SDoc
     end
     opt.separator nil
 
+    opt.on("--no-source", "-ns", "Do not show any source code") do |value|
+      options.no_source = true
+    end
+    opt.separator nil
+
   end
 
   def initialize(store, options)

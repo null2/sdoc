@@ -59,4 +59,15 @@ describe RDoc::Generator::SDoc do
     @options.search_index.must_equal false
   end
 
+  it "should parse no source option" do
+    assert !@options.github
+
+    out, err = capture_io do
+      @parser.parse %w[--no-source]
+    end
+
+    err.wont_match /^invalid options/
+    @options.github.must_equal true
+  end
+
 end
