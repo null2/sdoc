@@ -181,32 +181,34 @@
             </div>
           <% end %>
           
-          <% if method.token_stream %>
-            <% markup = method.sdoc_markup_code %>
-            <div class="sourcecode">
-              <%
-                # generate github link
-                github = if options.github
-                  if markup =~ /File\s(\S+), line (\d+)/
-                    path = $1
-                    line = $2.to_i
+          <% unless @no_source %>
+            <% if method.token_stream %>
+              <% markup = method.sdoc_markup_code %>
+              <div class="sourcecode">
+                <%
+                  # generate github link
+                  github = if options.github
+                    if markup =~ /File\s(\S+), line (\d+)/
+                      path = $1
+                      line = $2.to_i
+                    end
+                    path && github_url(path)
+                  else
+                    false
                   end
-                  path && github_url(path)
-                else
-                  false
-                end
-              %>
-              <p class="source-link">
-                Source: 
-                <a href="javascript:toggleSource('<%= method.aref %>_source')" id="l_<%= method.aref %>_source">show</a>
-                <% if github %>
-                  | <a href="<%= "#{github}#L#{line}" %>" target="_blank" class="github_url">on GitHub</a>
-                <% end %>
-              </p>
-              <div id="<%= method.aref %>_source" class="dyn-source">
-                <pre><%= markup %></pre>
+                %>
+                <p class="source-link">
+                  Source: 
+                  <a href="javascript:toggleSource('<%= method.aref %>_source')" id="l_<%= method.aref %>_source">show</a>
+                  <% if github %>
+                    | <a href="<%= "#{github}#L#{line}" %>" target="_blank" class="github_url">on GitHub</a>
+                  <% end %>
+                </p>
+                <div id="<%= method.aref %>_source" class="dyn-source">
+                  <pre><%= markup %></pre>
+                </div>
               </div>
-            </div>
+              <% end %>
             <% end %>
           </div>
         <% end #methods.each %>
