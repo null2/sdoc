@@ -60,6 +60,10 @@ class SDoc::Merge
                     "copied to merged build") do |v|
         @urls = v.split(' ').map{|name| name.strip }
       end
+
+      opt.on("-ns", "--no-source", "Do not show any source code") do
+        @no_source = true
+      end
     end
     opts.parse! options
     @template_dir = Pathname.new(RDoc::Options.new.template_dir_for 'merge')
